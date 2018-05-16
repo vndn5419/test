@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Mapper란? sql문을 정리한 파일이며 userMapper인터페이스의 메소드를 sql로 구현-->
+
+<!-- UserMapper에 상응하는 인터페이스를 연결해준다 -->
+<!-- 게시물관련 정보 처리 SQL -->
+<mapper namespace="DAO.ChickenMapper">
+
+<!-- 치킨 등록 -->
+<insert id="insertChicken" parameterType="Chicken">
+insert into chicken
+(
+	chicken_seq
+	,chicken_kind
+	,chicken_grade
+	,chicken_age
+	,indate
+)
+values
+(
+	chicken_seq.nextval
+	,#{chicken_kind}
+	,#{chicken_grade}
+	,#{chicken_age}
+	,sysdate
+)
+</insert>
+
+<!-- 치킨 리스트 가져오기 -->
+<select id="chickenList" resultType="Chicken">
+select
+	chicken_seq
+	,chicken_kind
+	,chicken_grade
+	,chicken_age
+	,indate
+from
+	chicken
+</select>
+
+<!-- 치킨삭제 -->
+<delete id="deleteChicken" parameterType="Chicken">
+delete chicken
+where chicken_seq=#{chicken_seq}
+</delete>
+
+
+</mapper>
